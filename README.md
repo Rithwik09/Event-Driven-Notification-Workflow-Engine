@@ -179,7 +179,7 @@ The focus is **backend system design and reliability**.
 
 ---
 
-## Resume Highlights
+## Highlights
 
 - Designed and implemented an event-driven backend using message queues and background workers
 - Built producer-consumer architecture with retries and dead-letter queues
