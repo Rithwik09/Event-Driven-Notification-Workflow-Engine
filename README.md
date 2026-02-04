@@ -161,6 +161,7 @@ export interface UserRegisteredPayload {
 }
 
 export type UserRegisteredEvent = BaseEvent<UserRegisteredPayload>;
+```
 
 ---
 
