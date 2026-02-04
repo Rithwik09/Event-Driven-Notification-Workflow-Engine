@@ -117,42 +117,50 @@ Retry   Dead Letter Queue
 
 src/
 ├─ api/
-│   ├─ routes/
-│   ├─ controllers/
-│   └─ middlewares/
+│ ├─ routes/
+│ ├─ controllers/
+│ └─ middlewares/
 ├─ events/
-│   ├─ producers/
-│   └─ event-types.js
+│ ├─ producers/
+│ ├─ consumers/
+│ └─ event-types.ts
 ├─ queues/
-│   ├─ index.js
-│   └─ queue-config.js
+│ ├─ index.ts
+│ └─ queue-config.ts
 ├─ workers/
-│   ├─ email.worker.js
-│   ├─ webhook.worker.js
-│   └─ audit.worker.js
+│ ├─ email.worker.ts
+│ ├─ webhook.worker.ts
+│ └─ audit.worker.ts
 ├─ auth/
-│   ├─ jwt.js
-│   └─ rbac.js
+│ ├─ jwt.ts
+│ └─ rbac.ts
 ├─ db/
-│   └─ prisma/
+│ ├─ prisma/
+│ └─ client.ts
 ├─ logs/
-└─ app.js
+├─ types/
+│ └─ index.ts
+├─ app.ts
+└─ server.ts
 
 ## Example Event Payload
 
-```json
-{
-  "eventType": "USER_REGISTERED",
-  "payload": {
-    "userId": "uuid",
-    "email": "user@example.com"
-  },
-  "metadata": {
-    "requestId": "uuid",
-    "timestamp": "2026-01-01T12:00:00Z"
-  }
+```ts
+export interface BaseEvent<T> {
+  eventType: string;
+  payload: T;
+  metadata: {
+    requestId: string;
+    timestamp: string;
+  };
 }
-````
+
+export interface UserRegisteredPayload {
+  userId: string;
+  email: string;
+}
+
+export type UserRegisteredEvent = BaseEvent<UserRegisteredPayload>;
 
 ---
 
