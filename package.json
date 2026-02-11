@@ -1,0 +1,38 @@
+{
+  "name": "event-notification",
+  "version": "1.0.0",
+  "description": "A scalable, event-driven backend system designed to process asynchronous workflows, notifications, and system events with reliability, retries, and observability.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --respawn src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "worker": "ts-node-dev src/workers/event.worker.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rithwik09/Event-Driven-Notification-Workflow-Engine.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Rithwik09/Event-Driven-Notification-Workflow-Engine/issues"
+  },
+  "homepage": "https://github.com/Rithwik09/Event-Driven-Notification-Workflow-Engine#readme",
+  "dependencies": {
+    "bullmq": "^5.67.3",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "ioredis": "^5.9.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.2.2",
+    "eslint": "^10.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -223,3 +223,8 @@ The focus is **backend system design and reliability**.
 - Dockerization
 - Monitoring enhancements
 - Documentation polish
+
+
+Installation 
+
+npm i 
