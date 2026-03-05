@@ -228,3 +228,50 @@ The focus is **backend system design and reliability**.
 Installation 
 
 npm i 
+
+## Qdrant + RAG Setup
+
+Add these to `.env`:
+
+```env
+QDRANT_URL=https://<cluster-id>.<region>.aws.cloud.qdrant.io
+QDRANT_API_KEY=<your-qdrant-api-key>
+QDRANT_COLLECTION=docs
+OPENAI_API_KEY=<your-openai-api-key>
+EMBEDDING_MODEL=text-embedding-3-small
+```
+
+`QDRANT_URL` is where your cluster endpoint goes, and `QDRANT_API_KEY` is where your Qdrant API key goes.
+
+### New RAG Endpoints
+
+- `POST /api/rag/index`
+- `POST /api/rag/query`
+
+Index documents:
+
+```json
+{
+  "documents": [
+    {
+      "id": "doc-1",
+      "text": "BullMQ queues can process background jobs.",
+      "metadata": { "source": "docs" }
+    }
+  ]
+}
+```
+
+Query documents:
+
+```json
+{
+  "query": "How are background jobs processed?",
+  "limit": 5
+}
+```
+
+The RAG flow now:
+1. Creates embeddings via OpenAI.
+2. Stores vectors in Qdrant collection (`QDRANT_COLLECTION`).
+3. Searches Qdrant for nearest matches during query.

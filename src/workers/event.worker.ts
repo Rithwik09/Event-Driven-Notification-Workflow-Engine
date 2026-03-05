@@ -1,6 +1,7 @@
 import { Worker, Job } from "bullmq";
 import { redisConnection } from "../queues/connection";
 import { BaseEvent } from "../events/event-types";
+import { deadLetterQueue } from "../queues/dead-letter.queue";
 
 const worker = new Worker(
   "event-queue",
@@ -16,6 +17,12 @@ const worker = new Worker(
   { connection: redisConnection }
 );
 
-worker.on("failed", (job, err) => {
-  console.error("❌ Job failed:", job?.id, err.message);
+// worker.on("failed", (job, err) => {
+//   console.error("❌ Job failed:", job?.id, err.message);
+worker.on("failed", async (job) => {
+  if (!job) {
+    return;
+  }
+  await deadLetterQueue.add("DEAD_JOB", job.data);
 });
+
